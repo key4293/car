@@ -1,0 +1,98 @@
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2b2b2b;
+    font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+}
+
+/* 전체 윈도우 */
+.window {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #3c3f41;
+}
+
+/* 타이틀 바 */
+.title-bar {
+    height: 46px;
+    background-color: #4b6eaf;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* 메인 영역 */
+.main-area {
+    flex: 1;
+    display: flex;
+    padding: 12px;
+}
+
+/* CCTV 4분할 영역 */
+.cctv-grid {
+    flex: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+}
+
+/* 개별 CCTV 화면 */
+.cctv-box {
+    background-color: #111111;
+    border: 1px solid #555;
+    color: #aaaaaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+/* 로그 패널 */
+.log-panel {
+    flex: 1;
+    margin-left: 12px;
+    background-color: #2b2b2b;
+    border: 1px solid #555;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 로그 제목 */
+.log-title {
+    color: white;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* 로그 내용 */
+.log-area {
+    flex: 1;
+    background-color: #000000;
+    border: 1px solid #555;
+    padding: 8px;
+    color: #cccccc;
+    font-size: 13px;
+    overflow-y: auto;
+}
+
+/* 버튼 */
+.log-panel button {
+    margin-top: 12px;
+    padding: 10px;
+    background-color: #4b6eaf;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.log-panel button:hover {
+    background-color: #5a7fcf;
+}

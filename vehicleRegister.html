@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>차량 등록 명단</title>
+
+    <!-- 로그인 체크: DOM 렌더링 전에 수행 -->
+    <script>
+        const loginUser = localStorage.getItem("loginUser");
+        const currentPage = window.location.pathname.split("/").pop();
+        if (!loginUser && currentPage !== "login.html") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/vehicleRegister.css">
+</head>
+<body>
+
+<div class="window">
+
+    <div class="title-bar">
+        차량 등록 명단
+    </div>
+
+    <div class="main-area">
+
+        <!-- 입력 영역 -->
+        <div class="form-panel">
+            <!-- 서버 연동용 form 추가 -->
+            <form id="vehicleForm" action="/register" method="POST">
+                <label for="plate">차량 번호</label>
+                <input type="text" id="plate" name="plate_number" placeholder="차량번호">
+
+                <label for="type">차종</label>
+                <input type="text" id="type" name="vehicle_type" placeholder="차종">
+
+                <label for="owner">소유자</label>
+                <input type="text" id="owner" name="owner_name" placeholder="소유자">
+
+                <button type="submit" id="addVehicleBtn">차량 등록</button>
+                <button type="button" id="backBtn">메인으로</button>
+            </form>
+        </div>
+
+        <!-- 목록 영역 -->
+        <div class="list-panel">
+            <div class="panel-title">등록된 차량</div>
+
+            <table id="vehicleTable">
+                <thead>
+                    <tr>
+                        <th>차량 번호</th>
+                        <th>차종</th>
+                        <th>소유자</th>
+                        <th>관리</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<!-- 기존 JS 파일 유지 -->
+<script src="js/vehicleRegister.js"></script>
+
+<!-- 폼 제출 이벤트 처리 (선택 사항: AJAX로 DB 연동) -->
+<script>
+    const form = document.getElementById('vehicleForm');
+    form.addEventListener('submit', function(e) {
+        // 기본 제출 방지 (AJAX 사용 시)
+        e.preventDefault();
+
+        const data = {
+            plate_number: form.plate_number.value,
+            vehicle_type: form.vehicle_type.value,
+            owner_name: form.owner_name.value
+        };
+
+        // 서버로 POST 요청 (예: Flask /register)
+        fetch('/register', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: new URLSearchParams(data)
+        })
+        .then(response => response.text())
+        .then(result => {
+            alert(result); // "차량 등록 완료!" 메시지
+            form.reset(); // 폼 초기화
+            // 필요 시 vehicleTable 업데이트 코드 추가
+        })
+        .catch(err => console.error(err));
+    });
+
+    // 메인으로 버튼 기능
+    document.getElementById('backBtn').addEventListener('click', () => {
+        window.location.href = 'index.html'; // 메인 페이지 경로
+    });
+</script>
+
+</body>
+</html>
