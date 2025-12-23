@@ -66,35 +66,8 @@
 <!-- 기존 JS 파일 유지 -->
 <script src="js/vehicleRegister.js"></script>
 
-<!-- 폼 제출 이벤트 처리 (선택 사항: AJAX로 DB 연동) -->
+<!-- 메인으로 버튼 기능 -->
 <script>
-    const form = document.getElementById('vehicleForm');
-    form.addEventListener('submit', function(e) {
-        // 기본 제출 방지 (AJAX 사용 시)
-        e.preventDefault();
-
-        const data = {
-            plate_number: form.plate_number.value,
-            vehicle_type: form.vehicle_type.value,
-            owner_name: form.owner_name.value
-        };
-
-        // 서버로 POST 요청 (예: Flask /register)
-        fetch('/register', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: new URLSearchParams(data)
-        })
-        .then(response => response.text())
-        .then(result => {
-            alert(result); // "차량 등록 완료!" 메시지
-            form.reset(); // 폼 초기화
-            // 필요 시 vehicleTable 업데이트 코드 추가
-        })
-        .catch(err => console.error(err));
-    });
-
-    // 메인으로 버튼 기능
     document.getElementById('backBtn').addEventListener('click', () => {
         window.location.href = 'index.html'; // 메인 페이지 경로
     });
