@@ -1,8 +1,3 @@
-// 로그인 체크
-if (!localStorage.getItem("loginUser")) {
-    window.location.href = "login.html";
-}
-
 const logArea = document.getElementById("logArea");
 
 function addLog(msg) {
@@ -21,5 +16,5 @@ setTimeout(() => {
 
 // 메인 이동
 document.getElementById("backBtn").addEventListener("click", () => {
-    window.location.href = "index.html";
+    window.location.href = "/index";
 });

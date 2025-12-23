@@ -1,22 +1,40 @@
 const loginBtn = document.getElementById("loginBtn");
 const statusText = document.getElementById("statusText");
 
-loginBtn.addEventListener("click", () => {
+loginBtn.addEventListener("click", async () => {
 
-    const id = document.getElementById("username").value;
-    const pw = document.getElementById("password").value;
+    const id = document.getElementById("username").value.trim();
+    const pw = document.getElementById("password").value.trim();
 
-    // 로그인 검증 (예제용)
-    if (id === "admin" && pw === "1234") {
-
-        // 로그인 정보 저장
-        localStorage.setItem("loginUser", id);
-
-        // 메인 윈도우로 이동
-        window.location.href = "index.html";
-
-    } else {
-        statusText.textContent = "로그인 실패. 다시 시도하세요.";
+    if (!id || !pw) {
+        statusText.textContent = "ID와 비밀번호를 입력하세요.";
         statusText.style.color = "#ff6b6b";
+        return;
+    }
+
+    try {
+        const formData = new URLSearchParams();
+        formData.append("username", id);
+        formData.append("password", pw);
+
+        const response = await fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData.toString()
+        });
+
+        if (response.ok) {
+            window.location.href = "/index";
+        } else {
+            statusText.textContent = "로그인 실패. ID/PW를 확인하세요.";
+            statusText.style.color = "#ff6b6b";
+        }
+
+    } catch (error) {
+        statusText.textContent = "서버 연결 실패";
+        statusText.style.color = "#ff6b6b";
+        console.error(error);
     }
 });

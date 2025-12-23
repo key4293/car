@@ -3,17 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>차량 등록 명단</title>
-
-    <!-- 로그인 체크: DOM 렌더링 전에 수행 -->
-    <script>
-        const loginUser = localStorage.getItem("loginUser");
-        const currentPage = window.location.pathname.split("/").pop();
-        if (!loginUser && currentPage !== "login.html") {
-            window.location.href = "login.html";
-        }
-    </script>
-
-    <link rel="stylesheet" href="css/vehicleRegister.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vehicleRegister.css') }}">
 </head>
 <body>
 
@@ -25,9 +15,7 @@
 
     <div class="main-area">
 
-        <!-- 입력 영역 -->
         <div class="form-panel">
-            <!-- 서버 연동용 form 추가 -->
             <form id="vehicleForm" action="/register" method="POST">
                 <label for="plate">차량 번호</label>
                 <input type="text" id="plate" name="plate_number" placeholder="차량번호">
@@ -43,7 +31,6 @@
             </form>
         </div>
 
-        <!-- 목록 영역 -->
         <div class="list-panel">
             <div class="panel-title">등록된 차량</div>
 
@@ -63,13 +50,11 @@
     </div>
 </div>
 
-<!-- 기존 JS 파일 유지 -->
-<script src="js/vehicleRegister.js"></script>
+<script src="{{ url_for('static', filename='js/vehicleRegister.js') }}"></script>
 
-<!-- 메인으로 버튼 기능 -->
 <script>
     document.getElementById('backBtn').addEventListener('click', () => {
-        window.location.href = 'index.html'; // 메인 페이지 경로
+        window.location.href = '/index';
     });
 </script>
 

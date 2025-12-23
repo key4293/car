@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CCTV</title>
-    <link rel="stylesheet" href="css/CCTV.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/CCTV.css') }}">
 </head>
 <body>
 
@@ -28,6 +28,6 @@
     </div>
 </div>
 
-<script src="js/CCTV.js"></script>
+<script src="{{ url_for('static', filename='js/CCTV.js') }}"></script>
 </body>
 </html>
